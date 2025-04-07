@@ -6,6 +6,7 @@
 class ConsultoryNode {
 public:
     std::string id;
+    std::string name;
     std::string days;
     std::string hours;
     std::string userid;
