@@ -174,6 +174,39 @@ public:
         }
         return nodes;
     }
+    void swapNodeData(MedicNode* a, MedicNode* b) {
+        std::swap(a->id, b->id);
+        std::swap(a->fname, b->fname);
+        std::swap(a->lname1, b->lname1);
+        std::swap(a->lname2, b->lname2);
+        std::swap(a->email, b->email);
+        std::swap(a->phone, b->phone);
+        std::swap(a->spec, b->spec);
+        std::swap(a->userid, b->userid);
+    }
+
+    MedicNode* partition(MedicNode* low, MedicNode* high) {
+        std::string pivot = high->lname1;
+        MedicNode* i = low->prev;
+
+        for (MedicNode* j = low; j != high; j = j->next) {
+            if (j->lname1 < pivot) {
+                i = (i == nullptr) ? low : i->next;
+                swapNodeData(i, j);
+            }
+        }
+        i = (i == nullptr) ? low : i->next;
+        swapNodeData(i, high);
+        return i;
+    }
+
+    void quickSort(MedicNode* low, MedicNode* high) {
+        if (low && high && low != high && low != high->next) {
+            MedicNode* pivot = partition(low, high);
+            quickSort(low, pivot->prev);
+            quickSort(pivot->next, high);
+        }
+    }
 
     void printList() const {
         MedicNode* current = head;
