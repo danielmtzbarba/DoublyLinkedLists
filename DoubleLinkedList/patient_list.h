@@ -3,7 +3,7 @@
 #include "utils.h"
 
 
-class MedicNode {
+class PatientNode {
 public:
 	std::string id;
 	std::string fname;
@@ -11,34 +11,36 @@ public:
 	std::string lname2;
 	std::string email;
 	std::string phone;
-	std::string spec;
+    std::string gender;
+    std::string age;
 	std::string userid;
 
-	MedicNode* next;
-	MedicNode* prev;
+	PatientNode* next;
+	PatientNode* prev;
 
-	MedicNode(const std::string& id,
+	PatientNode(const std::string& id,
 		const std::string& fname,
 		const std::string& lname1,
 		const std::string& lname2,
 		const std::string& email,
 		const std::string& phone,
-		const std::string& spec,
+		const std::string& gender,
+        const std::string& age,
 		const std::string& userid)
 		: id(id), fname(fname), lname1(lname1), lname2(lname2),
-		email(email), phone(phone), spec(spec), userid(userid),
+		email(email), phone(phone), gender(gender), age(age), userid(userid),
 		next(nullptr), prev(nullptr) {
 	}
 };
 
-class MedicList {
+class PatientList {
 public:
-    MedicNode* head;
-    MedicNode* tail;
+    PatientNode* head;
+    PatientNode* tail;
 
-    MedicList() : head(nullptr), tail(nullptr) {}
+    PatientList() : head(nullptr), tail(nullptr) {}
 
-    void append(MedicNode* newNode) {
+    void append(PatientNode* newNode) {
         if (!head) {
             head = tail = newNode;
         }
@@ -50,36 +52,38 @@ public:
     }
 
     void clear() {
-        MedicNode* current = head;
+        PatientNode* current = head;
         while (current) {
-            MedicNode* toDelete = current;
+            PatientNode* toDelete = current;
             current = current->next;
             delete toDelete;
         }
         head = tail = nullptr;
     }
 
-    void addMedic(const std::string& id,
+    void addPatient(const std::string& id,
         const std::string& fname,
         const std::string& lname1,
         const std::string& lname2,
         const std::string& email,
         const std::string& phone,
-        const std::string& spec,
+        const std::string& gender,
+        const std::string& age,
         const std::string& userid) {
-        MedicNode* newNode = new MedicNode(id, fname, lname1, lname2, email, phone, spec, userid);
+        PatientNode* newNode = new PatientNode(id, fname, lname1, lname2, email, phone, gender, age, userid);
         append(newNode);
     }
 
-    bool updateMedicById(const std::string& id,
+    bool updatePatientById(const std::string& id,
         const std::string& newFname,
         const std::string& newLname1,
         const std::string& newLname2,
         const std::string& newEmail,
         const std::string& newPhone,
-        const std::string& newSpec,
+        const std::string& newGender,
+        const std::string& newAge,
         const std::string& newUserid) {
-        MedicNode* current = head;
+        PatientNode* current = head;
         while (current) {
             if (current->id == id) {
                 current->fname = newFname;
@@ -87,7 +91,8 @@ public:
                 current->lname2 = newLname2;
                 current->email = newEmail;
                 current->phone = newPhone;
-                current->spec = newSpec;
+                current->gender = newGender;
+                current->age = newAge;
                 current->userid = newUserid;
                 return true;
             }
@@ -96,8 +101,8 @@ public:
         return false; // not found
     }
 
-    bool removeMedicById(const std::string& id) {
-        MedicNode* current = head;
+    bool removePatientById(const std::string& id) {
+        PatientNode* current = head;
         while (current) {
             if (current->id == id) {
                 if (current->prev) current->prev->next = current->next;
@@ -115,14 +120,14 @@ public:
     }
 
     void saveToFile() const {
-        const std::string& filename = "medics.bin";
+        const std::string& filename = "patients.bin";
         std::ofstream outFile(filename, std::ios::binary);
         if (!outFile) {
             std::cerr << "Error opening file for writing: " << filename << "\n";
             return;
         }
 
-        MedicNode* current = head;
+        PatientNode* current = head;
         while (current) {
             writeString(outFile, current->id);
             writeString(outFile, current->fname);
@@ -130,7 +135,8 @@ public:
             writeString(outFile, current->lname2);
             writeString(outFile, current->email);
             writeString(outFile, current->phone);
-            writeString(outFile, current->spec);
+            writeString(outFile, current->gender);
+            writeString(outFile, current->age);
             writeString(outFile, current->userid);
             current = current->next;
         }
@@ -139,7 +145,7 @@ public:
     }
 
     void loadFromFile() {
-        const std::string& filename = "medics.bin";
+        const std::string& filename = "patients.bin";
         std::ifstream inFile(filename, std::ios::binary);
         if (!inFile) {
             std::cerr << "Error opening file for reading: " << filename << "\n";
@@ -155,10 +161,11 @@ public:
             std::string lname2 = readString(inFile);
             std::string email = readString(inFile);
             std::string phone = readString(inFile);
-            std::string spec = readString(inFile);
+            std::string gender = readString(inFile);
+            std::string age = readString(inFile);
             std::string userid = readString(inFile);
 
-            MedicNode* newNode = new MedicNode(id, fname, lname1, lname2, email, phone, spec, userid);
+            PatientNode* newNode = new PatientNode(id, fname, lname1, lname2, email, phone, gender, age, userid);
             append(newNode);
         }
 
@@ -166,16 +173,15 @@ public:
     }
 
     void printList() const {
-        MedicNode* current = head;
+        PatientNode* current = head;
         while (current) {
             std::ofstream log("log.txt", std::ios::app);
             log << "ID: " << current->id << ", Name: "
                 << current->fname << " " << current->lname1 << " " << current->lname2
                 << ", Email: " << current->email
-                << ", Phone: " << current->phone
-                << ", Specialty: " << current->spec << "\n";
+                << ", Phone: " << current->phone << "\n";
             current = current->next;
         }
     }
 };
-extern MedicList medic_list;
+extern PatientList patient_list;

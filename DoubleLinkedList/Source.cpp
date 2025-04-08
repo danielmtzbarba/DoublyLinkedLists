@@ -1,16 +1,25 @@
 #pragma once
 
 #include "medic_win.cpp"
+#include "patient_win.cpp"
+#include "login_win.cpp"
 
 MedicList medic_list;
+PatientList patient_list;
+HINSTANCE hInst;
 
-// Entry point
+
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow){
-    medic_list.loadFromFile("medics.bin");
+    hInst = hInstance;
+    medic_list.loadFromFile();
+    patient_list.loadFromFile();
 
-    HWND app = CreateMedicWindow(hInstance);
-    HWND hListBox = GetDlgItem(app, IDC_LISTBOX_MEDICS);
-    LoadMedicsIntoListBox(hListBox, medic_list.head);
+    DialogBox(hInst, MAKEINTRESOURCE(IDD_DIALOG1), NULL, WindowProcLogin);
+    return 0;
+
+    //HWND app = CreatePatientWindow(hInstance);
+    //HWND hListBox = GetDlgItem(app, IDC_LISTBOX_PATIENTS);
+    //LoadPatientsIntoListBox(hListBox, patient_list.head);
 
     MSG msg;
     while (GetMessage(&msg, NULL, 0, 0)) {
@@ -28,7 +37,7 @@ int main() {
     //list.addMedic("002", "Bob", "Martinez", "Ramirez", "bob@example.com", "555-5678", "Neurology", "0");
     //list.addMedic("003", "Carol", "Fernandez", "Rojas", "carol@example.com", "555-9012", "Pediatrics", "0");
     //list.saveToFile("medics.bin");
-    list.loadFromFile("medics.bin");
+    list.loadFromFile();
     std::cout << "Initial list:\n";
     list.printList();
 

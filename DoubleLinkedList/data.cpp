@@ -1,5 +1,4 @@
 #pragma once
 
 #include "medic_list.h"
-#include <iostream>
-
+#include "patient_list.h"
