@@ -17,6 +17,9 @@ inline void LoadMedicsIntoListBox(HWND hwndListBox, MedicNode* head) {
 
 inline LRESULT CALLBACK WindowProcMedic(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     switch (uMsg) {
+    case WM_INITDIALOG:
+        CenterWindow(hwnd);
+        return TRUE;
     case WM_DESTROY:
         PostQuitMessage(0);
         return 0;
@@ -54,22 +57,9 @@ inline LRESULT CALLBACK WindowProcMedic(HWND hwnd, UINT uMsg, WPARAM wParam, LPA
 }
 
 inline HWND CreateMedicWindow(HINSTANCE hInstance) {
-    const wchar_t CLASS_NAME[] = L"MedicApp";
-
-    WNDCLASS wc = {};
-    wc.lpfnWndProc = WindowProcMedic;
-    wc.hInstance = hInstance;
-    wc.lpszClassName = CLASS_NAME;
-    wc.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
-    wc.hCursor = LoadCursor(NULL, IDC_ARROW);
-
-    RegisterClass(&wc);
-
-    HWND hwnd = CreateWindowEx(0, CLASS_NAME, L"Médicos",
+    HWND hwnd = CreateWindowEx(0, L"MedicWindow", L"Médicos",
         WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, 700, 500,
         NULL, NULL, hInstance, NULL);
-
-    if (!hwnd) return hwnd;
 
     // Listbox
     CreateWindow(L"STATIC", L"Médicos", WS_VISIBLE | WS_CHILD,
@@ -115,9 +105,29 @@ inline HWND CreateMedicWindow(HINSTANCE hInstance) {
     CreateWindow(L"BUTTON", L"Editar", WS_VISIBLE | WS_CHILD, labelX, y, 110, 25, hwnd, (HMENU)IDC_BTN_EDIT, hInstance, NULL);
     labelX += 140;
     CreateWindow(L"BUTTON", L"Eliminar", WS_VISIBLE | WS_CHILD, labelX, y, 110, 25, hwnd, (HMENU)IDC_BTN_DELETE, hInstance, NULL);
+    
 
+    HWND hListBox = GetDlgItem(hwnd, IDC_LISTBOX_MEDICS);
+    LoadMedicsIntoListBox(hListBox, medic_list.head);
     ShowWindow(hwnd, SW_SHOWNORMAL);
     UpdateWindow(hwnd);
     return hwnd;
 }
 
+inline void RegisterMedicWindow(HINSTANCE hInstance) {
+
+    WNDCLASS wc = {};
+
+    if (GetClassInfo(hInst, L"MedicWindow", &wc)) {
+        MessageBox(nullptr, L"Class already registered.", L"Error", MB_OK);
+        return;
+    }
+
+    wc.lpfnWndProc = WindowProcMedic;
+    wc.hInstance = GetModuleHandle(NULL);
+    wc.lpszClassName =L"MedicWindow";
+    wc.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
+    wc.hCursor = LoadCursor(NULL, IDC_ARROW);
+
+    RegisterClass(&wc);
+}

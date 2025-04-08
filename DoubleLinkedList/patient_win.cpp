@@ -126,3 +126,20 @@ inline HWND CreatePatientWindow(HINSTANCE hInstance) {
     return hwnd;
 }
 
+inline void RegisterPatientWindow(HINSTANCE hInstance) {
+
+    WNDCLASS wc = {};
+
+    if (GetClassInfo(hInst, L"PatientWindow", &wc)) {
+        MessageBox(nullptr, L"Class already registered.", L"Error", MB_OK);
+        return;
+    }
+
+    wc.lpfnWndProc = WindowProcPatient;
+    wc.hInstance = GetModuleHandle(NULL);
+    wc.lpszClassName =L"PatientWindow";
+    wc.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
+    wc.hCursor = LoadCursor(NULL, IDC_ARROW);
+
+    RegisterClass(&wc);
+}

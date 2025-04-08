@@ -55,3 +55,20 @@ inline std::string ReadTextBox(HWND hwnd, int ID_TEXTBOX) {
         std::string str = wcharToChar(buffer);
         return str;
 }
+
+inline void CenterWindow(HWND hwnd) {
+    RECT rc;
+    GetWindowRect(hwnd, &rc);
+
+    int winWidth = rc.right - rc.left;
+    int winHeight = rc.bottom - rc.top;
+
+    int screenWidth = GetSystemMetrics(SM_CXSCREEN);
+    int screenHeight = GetSystemMetrics(SM_CYSCREEN);
+
+    int x = (screenWidth - winWidth) / 2;
+    int y = (screenHeight - winHeight) / 2;
+
+    MoveWindow(hwnd, x, y, winWidth, winHeight, TRUE);
+}
+

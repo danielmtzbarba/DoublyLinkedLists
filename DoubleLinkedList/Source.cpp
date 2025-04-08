@@ -1,4 +1,6 @@
 #pragma once
+#include "data.cpp"
+HINSTANCE hInst;
 
 #include "medic_win.cpp"
 #include "patient_win.cpp"
@@ -6,27 +8,20 @@
 
 MedicList medic_list;
 PatientList patient_list;
-HINSTANCE hInst;
 
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow){
     hInst = hInstance;
     medic_list.loadFromFile();
     patient_list.loadFromFile();
+    
+    RegisterMedicWindow(hInst);
+    RegisterPatientWindow(hInst);
 
     DialogBox(hInst, MAKEINTRESOURCE(IDD_DIALOG1), NULL, WindowProcLogin);
     return 0;
 
-    //HWND app = CreatePatientWindow(hInstance);
-    //HWND hListBox = GetDlgItem(app, IDC_LISTBOX_PATIENTS);
-    //LoadPatientsIntoListBox(hListBox, patient_list.head);
 
-    MSG msg;
-    while (GetMessage(&msg, NULL, 0, 0)) {
-        TranslateMessage(&msg);
-        DispatchMessage(&msg);
-    }
-    return (int)msg.wParam;
 }
 
 int main() {
