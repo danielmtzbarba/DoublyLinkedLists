@@ -4,22 +4,9 @@
 #include <iostream>
 #include <fstream>   // <-- Required for std::ofstream and std::ifstream
 #include <string>
+#include <stdio.h>
+#include <stdlib.h>
 
-#define IDC_LISTBOX_PATIENTS 101
-#define IDC_EDIT_NAME        102
-#define IDC_EDIT_EMAIL       103
-#define IDC_EDIT_GENDER      104
-#define IDC_EDIT_PHONE       105
-#define IDC_EDIT_NUMBER      106
-#define IDC_EDIT_AGE         107
-
-#define IDC_BTN_EDIT         108
-#define IDC_BTN_ADD          109
-#define IDC_BTN_SEARCH_EMAIL 110
-#define IDC_BTN_SAVE         111
-#define IDC_BTN_CANCEL       112
-#define IDC_BTN_DELETE       113
-#define IDC_BTN_SEARCH_NAME  114
 
 inline void writeString(std::ofstream& out, const std::string& str) {
 	size_t length = str.size();
@@ -33,4 +20,38 @@ inline std::string readString(std::ifstream& in) {
 	std::string str(length, '\0');
 	in.read(&str[0], length);
 	return str;
+}
+
+inline std::wstring StringToWString(const std::string& str) {
+	int size_needed = MultiByteToWideChar(CP_UTF8, 0, str.c_str(), -1, NULL, 0);
+	std::wstring wstrTo(size_needed, 0);
+	MultiByteToWideChar(CP_UTF8, 0, str.c_str(), -1, &wstrTo[0], size_needed);
+	return wstrTo;
+}
+
+inline char* wcharToChar(const wchar_t* wstr) {
+    // Calculate the size of the converted string (in bytes)
+    int len = WideCharToMultiByte(CP_UTF8, 0, wstr, -1, NULL, 0, NULL, NULL);
+    if (len == 0) {
+        return NULL;  // Conversion failed
+    }
+
+    // Allocate memory for the converted string
+    char* str = (char*)malloc(len * sizeof(char));
+    if (str == NULL) {
+        return NULL;  // Memory allocation failed
+    }
+
+    // Perform the conversion
+    WideCharToMultiByte(CP_UTF8, 0, wstr, -1, str, len, NULL, NULL);
+
+    return str;
+}
+
+inline std::string ReadTextBox(HWND hwnd, int ID_TEXTBOX) {
+        wchar_t buffer[256];
+        HWND hwndEdit = GetDlgItem(hwnd, ID_TEXTBOX); 
+        GetWindowTextW(hwndEdit, buffer, sizeof(buffer));
+        std::string str = wcharToChar(buffer);
+        return str;
 }

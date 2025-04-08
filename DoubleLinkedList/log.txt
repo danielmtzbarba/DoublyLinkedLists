@@ -1,0 +1,3 @@
+ID: 001, Name: Romo Ramirez Angel, Email: romo@uanl.com, Phone: 123456789, Specialty: Traumatologia
+ID: 001, Name: Romo Ramirez Angel, Email: romo@uanl.com, Phone: 123456789, Specialty: Traumatologia
+ID: 002, Name: Martinez Alvarado Jose, Email: martinez@uanl.com, Phone: 123456789, Specialty: Cardiologia

@@ -1,17 +1,16 @@
 #pragma once
 
-#include "medic_list.cpp"
-#include "patient_win.cpp"
+#include "medic_win.cpp"
 
-using namespace std;
-
-// Define button IDs
-#define ID_BTN_SUBMIT 1
-#define ID_BTN_EXIT   2
+MedicList medic_list;
 
 // Entry point
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow){
-    CreatePatientWindow(hInstance);
+    medic_list.loadFromFile("medics.bin");
+
+    HWND app = CreateMedicWindow(hInstance);
+    HWND hListBox = GetDlgItem(app, IDC_LISTBOX_MEDICS);
+    LoadMedicsIntoListBox(hListBox, medic_list.head);
 
     MSG msg;
     while (GetMessage(&msg, NULL, 0, 0)) {

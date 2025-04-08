@@ -114,7 +114,8 @@ public:
         return false; // not found
     }
 
-    void saveToFile(const std::string& filename) const {
+    void saveToFile() const {
+        const std::string& filename = "medics.bin";
         std::ofstream outFile(filename, std::ios::binary);
         if (!outFile) {
             std::cerr << "Error opening file for writing: " << filename << "\n";
@@ -166,7 +167,8 @@ public:
     void printList() const {
         MedicNode* current = head;
         while (current) {
-            std::cout << "ID: " << current->id << ", Name: "
+            std::ofstream log("log.txt", std::ios::app);
+            log << "ID: " << current->id << ", Name: "
                 << current->fname << " " << current->lname1 << " " << current->lname2
                 << ", Email: " << current->email
                 << ", Phone: " << current->phone
@@ -175,3 +177,4 @@ public:
         }
     }
 };
+extern MedicList medic_list;
