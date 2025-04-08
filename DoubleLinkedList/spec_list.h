@@ -112,6 +112,16 @@ public:
 
         inFile.close();
     }
+
+    std::vector<SpecNode*> extractToVector() {
+        std::vector<SpecNode*> nodes;
+        SpecNode* current = head;
+        while (current) {
+            nodes.push_back(current);
+            current = current->next;
+        }
+        return nodes;
+    }
 };
 
 extern SpecList spec_list;

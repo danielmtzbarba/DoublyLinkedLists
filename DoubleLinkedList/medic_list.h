@@ -165,6 +165,16 @@ public:
         inFile.close();
     }
 
+    std::vector<MedicNode*> extractToVector() {
+        std::vector<MedicNode*> nodes;
+        MedicNode* current = head;
+        while (current) {
+            nodes.push_back(current);
+            current = current->next;
+        }
+        return nodes;
+    }
+
     void printList() const {
         MedicNode* current = head;
         while (current) {

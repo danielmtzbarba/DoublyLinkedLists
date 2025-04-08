@@ -146,6 +146,16 @@ public:
 
         inFile.close();
     }
+
+    std::vector<AppointmentNode*> extractToVector() {
+        std::vector<AppointmentNode*> nodes;
+        AppointmentNode* current = head;
+        while (current) {
+            nodes.push_back(current);
+            current = current->next;
+        }
+        return nodes;
+    }
 };
 
 extern AppointmentList appointment_list;

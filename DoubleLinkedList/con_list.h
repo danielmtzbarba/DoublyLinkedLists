@@ -144,5 +144,16 @@ public:
 
         inFile.close();
     }
+
+    std::vector<ConsultoryNode*> extractToVector() {
+        std::vector<ConsultoryNode*> nodes;
+        ConsultoryNode* current = head;
+        while (current) {
+            nodes.push_back(current);
+            current = current->next;
+        }
+        return nodes;
+    }
 };
+
 extern ConsultoryList consultory_list;

@@ -94,9 +94,6 @@ public:
     bool UserLoginById(const std::string& id, const std::string& password) {
         UserNode* current = head;
         while (current) {
-            std::ofstream log("log.txt", std::ios::app);
-            log << "ID: " << current->id << ", Password: "
-                << id << " " << password << " " << "\n";
             if (current->id == id && current->password == password) {
                 return true;
             }
@@ -170,6 +167,16 @@ public:
         }
 
         inFile.close();
+    }
+
+    std::vector<UserNode*> extractToVector() {
+        std::vector<UserNode*> nodes;
+        UserNode* current = head;
+        while (current) {
+            nodes.push_back(current);
+            current = current->next;
+        }
+        return nodes;
     }
 
     void printList() const {
