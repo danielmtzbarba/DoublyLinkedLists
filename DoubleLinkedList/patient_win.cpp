@@ -4,9 +4,10 @@
 #include "utils.h"
 #include "data.cpp"
 
+
 inline void LoadPatientsIntoListBox(HWND hwndListBox, PatientNode* head) {
     SendMessage(hwndListBox, LB_RESETCONTENT, 0, 0); // Clear existing content
-    
+
     PatientNode* current = head;
     while (current != nullptr) {
         std::wstring displayText = StringToWString(current->lname1);

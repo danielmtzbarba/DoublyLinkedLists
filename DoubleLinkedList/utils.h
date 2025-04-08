@@ -6,6 +6,7 @@
 #include <string>
 #include <stdio.h>
 #include <stdlib.h>
+#include <vector>
 
 
 inline void writeString(std::ofstream& out, const std::string& str) {

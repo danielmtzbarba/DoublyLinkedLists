@@ -21,7 +21,7 @@
     <ClCompile Include="medic_list.h">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="con_list.cpp">
+    <ClCompile Include="con_list.h">
       <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="patient_win.cpp">
@@ -34,6 +34,9 @@
       <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="login_win.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sort_medic.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -51,6 +54,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="patient_list.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="user_list.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="spec_list.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="app_list.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

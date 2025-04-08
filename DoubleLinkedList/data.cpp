@@ -2,6 +2,10 @@
 
 #include "medic_list.h"
 #include "patient_list.h"
+#include "user_list.h"
+#include "spec_list.h"
+#include "app_list.h"
+#include "con_list.h"
 
 extern HINSTANCE hInst;
 

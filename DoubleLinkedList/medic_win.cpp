@@ -4,9 +4,12 @@
 #include "utils.h"
 #include "data.cpp"
 
+#include "sort_medic.cpp"
+
 inline void LoadMedicsIntoListBox(HWND hwndListBox, MedicNode* head) {
     SendMessage(hwndListBox, LB_RESETCONTENT, 0, 0); // Clear existing content
-    
+    sortMedicList(medic_list, true, true);  // Pass true for sorting by lname1
+    medic_list.printList();
     MedicNode* current = head;
     while (current != nullptr) {
         std::wstring displayText = StringToWString(current->lname1);

@@ -7,6 +7,7 @@ class ConsultoryNode {
 public:
     std::string id;
     std::string name;
+    std::string spec;
     std::string days;
     std::string hours;
     std::string userid;
@@ -15,8 +16,9 @@ public:
     ConsultoryNode* prev;
 
     ConsultoryNode(const std::string& id,
-        const std::string& days, const std::string& hours, const std::string& userid)
-        : id(id), days(days), hours(hours), userid(userid),
+        const std::string&name, const std::string&spec, const std::string& days,
+        const std::string& hours, const std::string& userid)
+        : id(id), name(name), spec(spec), days(days), hours(hours), userid(userid),
         next(nullptr), prev(nullptr) {
     }
 };
@@ -50,20 +52,26 @@ public:
     }
 
     void addConsultory(const std::string& id,
+        const std::string& name,
+        const std::string& spec,
         const std::string& days,
         const std::string& hours,
         const std::string& userid) {
-        ConsultoryNode* newNode = new ConsultoryNode(id, days, hours, userid);
+        ConsultoryNode* newNode = new ConsultoryNode(id, name, spec, days, hours, userid);
         append(newNode);
     }
 
     bool updateConsultoryById(const std::string& id,
+        const std::string& newName,
+        const std::string& newSpec,
         const std::string& newDays,
         const std::string& newHours,
         const std::string& newUserid) {
         ConsultoryNode* current = head;
         while (current) {
             if (current->id == id) {
+                current->name = newName;
+                current->spec = newSpec;
                 current->days = newDays;
                 current->hours = newHours;
                 current->userid = newUserid;
@@ -74,7 +82,7 @@ public:
         return false; // not found
     }
 
-    bool removeMedicById(const std::string& id) {
+    bool removeConsultoryById(const std::string& id) {
         ConsultoryNode* current = head;
         while (current) {
             if (current->id == id) {
@@ -92,7 +100,8 @@ public:
         return false; // not found
     }
 
-    void saveToFile(const std::string& filename) const {
+    void saveToFile() const {
+        const std::string& filename = "consultory.bin";
         std::ofstream outFile(filename, std::ios::binary);
         if (!outFile) {
             std::cerr << "Error opening file for writing: " << filename << "\n";
@@ -111,7 +120,8 @@ public:
         outFile.close();
     }
 
-    void loadFromFile(const std::string& filename) {
+    void loadFromFile() {
+        const std::string& filename = "consultory.bin";
         std::ifstream inFile(filename, std::ios::binary);
         if (!inFile) {
             std::cerr << "Error opening file for reading: " << filename << "\n";
@@ -122,14 +132,17 @@ public:
 
         while (inFile.peek() != EOF) {
             std::string id = readString(inFile);
+            std::string name = readString(inFile);
+            std::string spec = readString(inFile);
             std::string days= readString(inFile);
             std::string hours= readString(inFile);
             std::string userid = readString(inFile);
 
-            ConsultoryNode* newNode = new ConsultoryNode(id, days, hours, userid);
+            ConsultoryNode* newNode = new ConsultoryNode(id, name, spec, days, hours, userid);
             append(newNode);
         }
 
         inFile.close();
     }
 };
+extern ConsultoryList consultory_list;

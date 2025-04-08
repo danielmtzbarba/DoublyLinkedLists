@@ -127,19 +127,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="con_list.cpp" />
+    <ClCompile Include="con_list.h" />
     <ClCompile Include="login_win.cpp" />
     <ClCompile Include="medic_list.h" />
     <ClCompile Include="medic_win.cpp" />
     <ClCompile Include="menu_win.cpp" />
+    <ClCompile Include="sort_medic.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="patient_win.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="app_list.h" />
     <ClInclude Include="data.cpp" />
     <ClInclude Include="Header.h" />
     <ClInclude Include="patient_list.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="spec_list.h" />
+    <ClInclude Include="user_list.h" />
     <ClInclude Include="utils.h" />
   </ItemGroup>
   <ItemGroup>
