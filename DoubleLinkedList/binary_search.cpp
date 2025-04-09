@@ -22,13 +22,11 @@ MedicNode* binarySearch(const std::vector<MedicNode*>& nodes, const std::string&
 }
 
 MedicNode* searchMedicByLname1(const std::string& lname1) {
-    // Step 1: Convert list to vector
-    std::vector<MedicNode*> nodes = medic_list.extractToVector();
+    // Step 1: Use QuickSort based on `lname1`
+    medic_list.quickSort(medic_list.head, medic_list.tail);
 
-    // Step 2: Sort the vector based on `lname1`
-    std::sort(nodes.begin(), nodes.end(), [](MedicNode* a, MedicNode* b) {
-        return a->lname1 < b->lname1;
-        });
+    // Step 2: Convert list to vector
+    std::vector<MedicNode*> nodes = medic_list.extractToVector();
 
     // Step 3: Perform binary search on the sorted vector
     return binarySearch(nodes, lname1);
