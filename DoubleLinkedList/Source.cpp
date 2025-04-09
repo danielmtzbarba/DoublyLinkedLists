@@ -31,6 +31,16 @@ void GenerateData() {
     return;
 }
 
+void QuickSortMedic() {
+    std::ofstream log("log.txt", std::ios::app);
+    log << "Original list: " << "\n";
+    medic_list.printList();
+    medic_list.quickSort(medic_list.head, medic_list.tail);
+    log << "Sorted list: " << "\n";
+    medic_list.printList();
+
+}
+
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow){
     hInst = hInstance;
     GenerateData();
@@ -40,6 +50,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     consultory_list.loadFromFile();
     appointment_list.loadFromFile();
     
+    QuickSortMedic();
+
     RegisterMedicWindow(hInst);
     RegisterPatientWindow(hInst);
 

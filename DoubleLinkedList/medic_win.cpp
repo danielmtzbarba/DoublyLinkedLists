@@ -8,8 +8,6 @@
 
 inline void LoadMedicsIntoListBox(HWND hwndListBox, MedicNode* head) {
     SendMessage(hwndListBox, LB_RESETCONTENT, 0, 0); // Clear existing content
-    sortMedicList(medic_list, true, true);  // Pass true for sorting by lname1
-    medic_list.printList();
     MedicNode* current = head;
     while (current != nullptr) {
         std::wstring displayText = StringToWString(current->lname1);
@@ -19,10 +17,9 @@ inline void LoadMedicsIntoListBox(HWND hwndListBox, MedicNode* head) {
 }
 
 inline LRESULT CALLBACK WindowProcMedic(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+    MedicList sorted_list;
+    HWND hwndBox;
     switch (uMsg) {
-    case WM_INITDIALOG:
-        CenterWindow(hwnd);
-        return TRUE;
     case WM_DESTROY:
         PostQuitMessage(0);
         return 0;
@@ -31,7 +28,6 @@ inline LRESULT CALLBACK WindowProcMedic(HWND hwnd, UINT uMsg, WPARAM wParam, LPA
         std::string id, lname1, lname2, fname, email, phone, spec;
         switch (LOWORD(wParam)) {
         case IDC_BTN_ADD:
-            HWND hwndBox;
             id = ReadTextBox(hwnd, IDC_EDIT_ID);
             lname1  = ReadTextBox(hwnd, IDC_EDIT_LNAME1);
             lname2 = ReadTextBox(hwnd, IDC_EDIT_LNAME2);
@@ -42,7 +38,9 @@ inline LRESULT CALLBACK WindowProcMedic(HWND hwnd, UINT uMsg, WPARAM wParam, LPA
             medic_list.addMedic(id, fname, lname1, lname2, email, phone, spec, "Treviño");
             medic_list.saveToFile();
             hwndBox = GetDlgItem(hwnd, IDC_LISTBOX_MEDICS);
-            LoadMedicsIntoListBox(hwndBox, medic_list.head);
+            sorted_list = sortMedicsByName();
+            sorted_list.printList();
+            LoadMedicsIntoListBox(hwndBox, sorted_list.head);
             MessageBox(hwnd, L"Médico registrado exitosamente!", L"Info", MB_OK);
             break;
         case IDC_BTN_EDIT:
@@ -111,7 +109,10 @@ inline HWND CreateMedicWindow(HINSTANCE hInstance) {
     
 
     HWND hListBox = GetDlgItem(hwnd, IDC_LISTBOX_MEDICS);
-    LoadMedicsIntoListBox(hListBox, medic_list.head);
+
+    MedicList sorted_list = sortMedicsByName();
+    sorted_list.printList();
+    LoadMedicsIntoListBox(hListBox, sorted_list.head);
     ShowWindow(hwnd, SW_SHOWNORMAL);
     UpdateWindow(hwnd);
     return hwnd;

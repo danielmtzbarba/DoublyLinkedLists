@@ -1,21 +1,22 @@
-ID: danielmtz@cio.mx, Password:  Iniciar Sesion 
-ID: danielmtz, Password:  Iniciar Sesion 
-ID: danielmtz@cio.mx, Password: danielmtz  
-ID: danielmtz, Password: danielmtz  
-ID: danielmtz@cio.mx, Password:   
-ID: danielmtz, Password:   
-ID: danielmtz@cio.mx, Password: danielmtz@cio.mx 1234 
-ID: danielmtz@cio.mx, Password: danielmtz 1 
-ID: danielmtz, Password: danielmtz 1 
-ID: danielmtz@cio.mx, Password:   
-ID: danielmtz, Password:   
-ID: danielmtz@cio.mx, Password: danielmtz  
-ID: danielmtz, Password: danielmtz  
-ID: ID: ID: ID: ID: ID: ID: ID: ID: ID: ID: danielmtz@cio.mx, Password: danielmtz  
-ID: danielmtz, Password: danielmtz  
-ID: danielmtz@cio.mx, Password:   
-ID: danielmtz, Password:   
-ID: danielmtz@cio.mx, Password: danielmtz  
-ID: danielmtz, Password: danielmtz  
-ID: danielmtz@cio.mx, Password:   
-ID: danielmtz, Password:   
+ID: 001, Name: Juan Pérez García, Email: juanperez@example.com, Phone: 555-1234, Specialty: Cardiólogo
+ID: 002, Name: María González Sánchez, Email: mariagonzalez@example.com, Phone: 555-5678, Specialty: Pediatra
+ID: 003, Name: Carlos Rodríguez Martínez, Email: carlosrodriguez@example.com, Phone: 555-2345, Specialty: Cirujano
+ID: 004, Name: Laura Martínez López, Email: lauramartinez@example.com, Phone: 555-6789, Specialty: Dermatóloga
+ID: 005, Name: Andrés López Ramírez, Email: andreslopez@example.com, Phone: 555-3456, Specialty: Neurólogo
+ID: 006, Name: Sofía Sánchez Torres, Email: sofisanchez@example.com, Phone: 555-8901, Specialty: Ginecóloga
+ID: 007, Name: David Fernández Morales, Email: davidfernandez@example.com, Phone: 555-4567, Specialty: Endocrinólogo
+ID: 008, Name: Elena García Vázquez, Email: elenagarcia@example.com, Phone: 555-5670, Specialty: Oftalmóloga
+ID: 009, Name: Francisco Díaz Pérez, Email: franciscodiaz@example.com, Phone: 555-6780, Specialty: Oncólogo
+ID: 010, Name: Isabel Álvarez Jiménez, Email: isabelalvarez@example.com, Phone: 555-8902, Specialty: Urgencióloga
+ID: 009, Name: Francisco Díaz Pérez, Email: franciscodiaz@example.com, Phone: 555-6780, Specialty: Oncólogo
+ID: 007, Name: David Fernández Morales, Email: davidfernandez@example.com, Phone: 555-4567, Specialty: Endocrinólogo
+ID: 008, Name: Elena García Vázquez, Email: elenagarcia@example.com, Phone: 555-5670, Specialty: Oftalmóloga
+ID: 002, Name: María González Sánchez, Email: mariagonzalez@example.com, Phone: 555-5678, Specialty: Pediatra
+ID: 005, Name: Andrés López Ramírez, Email: andreslopez@example.com, Phone: 555-3456, Specialty: Neurólogo
+ID: 004, Name: Laura Martínez López, Email: lauramartinez@example.com, Phone: 555-6789, Specialty: Dermatóloga
+ID: 001, Name: Juan Pérez García, Email: juanperez@example.com, Phone: 555-1234, Specialty: Cardiólogo
+ID: 003, Name: Carlos Rodríguez Martínez, Email: carlosrodriguez@example.com, Phone: 555-2345, Specialty: Cirujano
+ID: 006, Name: Sofía Sánchez Torres, Email: sofisanchez@example.com, Phone: 555-8901, Specialty: Ginecóloga
+ID: 010, Name: Isabel Álvarez Jiménez, Email: isabelalvarez@example.com, Phone: 555-8902, Specialty: Urgencióloga
+Original list: 
+Sorted list: 

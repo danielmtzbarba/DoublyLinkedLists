@@ -127,12 +127,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="binary_search.cpp" />
     <ClCompile Include="con_list.h" />
     <ClCompile Include="login_win.cpp" />
     <ClCompile Include="medic_list.h" />
     <ClCompile Include="medic_win.cpp" />
     <ClCompile Include="menu_win.cpp" />
-    <ClCompile Include="sort_medic.cpp" />
+    <ClCompile Include="heap_sort.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="patient_win.cpp" />
   </ItemGroup>

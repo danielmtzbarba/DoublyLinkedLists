@@ -36,7 +36,10 @@
     <ClCompile Include="login_win.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="sort_medic.cpp">
+    <ClCompile Include="heap_sort.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="binary_search.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
